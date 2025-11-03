@@ -1436,11 +1436,11 @@ const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_NEEDLE ui
 };
 
 const lv_img_dsc_t Needle = {
-  .header.cf = LV_IMG_CF_TRUE_COLOR_ALPHA,
-  .header.always_zero = 0,
-  .header.reserved = 0,
-  .header.w = 27,
-  .header.h = 350,
-  .data_size = 9450 * LV_IMG_PX_SIZE_ALPHA_BYTE,
-  .data = Needle_map,
+  LV_IMG_CF_TRUE_COLOR_ALPHA,
+  0,
+  0,
+  27,
+  350,
+  9450 * LV_IMG_PX_SIZE_ALPHA_BYTE,
+  Needle_map,
 };
