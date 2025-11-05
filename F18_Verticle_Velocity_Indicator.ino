@@ -41,8 +41,16 @@ void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color
 }
 
 void onVsiChange(unsigned int newValue) 
-{    
-  lv_img_set_angle(img_Needle, map(newValue, 0, 65530, 0, 3600));
+{
+    // Map the DCS value (0–65535) to 0–3600 (tenths of degrees)
+  int16_t angle = map(newValue, 0, 65535, 0, 3600);
+
+  // Reverse direction (make clockwise), and offset so 0 points right (90°)
+  int16_t adjustedAngle = 900 + angle;
+  if (adjustedAngle < 0) adjustedAngle -= 3600; // wrap around
+
+  lv_img_set_angle(img_Needle, adjustedAngle);
+  
 }
 DcsBios::IntegerBuffer vsiBuffer(0x7500, 0xffff, 0, onVsiChange);
 
